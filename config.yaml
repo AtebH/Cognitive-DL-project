@@ -1,0 +1,55 @@
+training:
+  epochs: 10
+  learning_rate: 0.001
+  save_interval: 5
+  checkpoint_dir: '../checkpoints/'
+  random_seed: 42
+  n_bootstrap_models: 2
+  optimization_metric: 'f1'
+
+model:
+  name: 'resnet18'
+  pretrained: true
+  num_classes: 2
+
+augmentation:
+  rotation: true
+  flip: true
+  contrast_enhancement: true
+
+preprocessing:
+  normalize: true
+  histogram_equalization: true
+  contrast_enhancement: false
+
+sampling:
+  oversampling: true
+  oversampling_ratio: 0.5
+  undersampling: true
+  undersampling_ratio: 0.5
+
+cross_validation:
+  k_folds: 2
+
+hyperparameter_tuning:
+  n_iter: 2
+  eval_epochs: 1
+  cv: 2
+  param_grid:
+    learning_rate: [0.1]
+    batch_size: [32]
+
+data:
+  train_dir: 'E:/datasets/chest_xray/train'
+  val_dir: 'E:/datasets/chest_xray/val'
+  test_dir: 'E:/datasets/chest_xray/test'
+  batch_size: 32
+  class_names: ['Normal', 'Pneumonia']
+
+logging:
+  log_file: '../logs/training.log'
+  log_dir: '../logs/'
+
+inference:
+  image_path: '../data/person1619_virus_2806.jpeg'
+  checkpoint_path: '../checkpoints/checkpoint_epoch_10.pth'
